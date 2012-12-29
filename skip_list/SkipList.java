@@ -108,6 +108,21 @@ public class SkipList<E,C extends Comparator<E>> {
 		return null;
 	}
 	
+	public E get(int index) {
+		SkipNode node = m_header.m_forward[0];
+		if(index == 0) {
+			return node.m_elem;
+		}
+		while(node != null) {
+			node = node.m_forward[0];
+			index --;
+			if(index == 0) {
+				return node.m_elem;
+			}
+		}
+		return null;
+	}
+	
 	
 	public boolean contains(E e) {
 		return get(e) != null;

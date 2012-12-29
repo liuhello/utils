@@ -1,6 +1,7 @@
 package skip_list;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -63,6 +64,23 @@ public class TestSkipListUnit{
 		}
 		for(Integer v : il) {
 			Assert.assertNull(list.get(v));
+		}
+	}
+	@Test
+	public void testGet() {
+		Random r = new Random();
+		List<Integer> set = new ArrayList<Integer>();
+		SkipList<Integer, Comparator<Integer>> list = new SkipList<Integer, Comparator<Integer>>(16, new IntegerCompator());
+		for(int i = 0;i < 10000;i++) {
+			int v = r.nextInt();
+			if(!set.contains(v)) {
+				list.add(v);
+				set.add(v);
+			}
+		}
+		Collections.sort(set);
+		for(int i = 0;i < set.size();i++) {
+			Assert.assertEquals(set.get(i), list.get(i));
 		}
 	}
 	
